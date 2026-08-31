@@ -1,0 +1,17 @@
+*
+!.gitignore
+!README.md
+!pyproject.toml
+!src/
+!src/humanoid_ttt/
+!src/humanoid_ttt/__init__.py
+!src/humanoid_ttt/types.py
+!src/humanoid_ttt/hashing.py
+!src/humanoid_ttt/signatures.py
+!src/humanoid_ttt/motion_features.py
+!src/humanoid_ttt/entry_features.py
+!src/humanoid_ttt/certificates.py
+!src/humanoid_ttt/memory.py
+!src/humanoid_ttt/consolidation.py
+!src/humanoid_ttt/latent.py
+!src/humanoid_ttt/sac.py
