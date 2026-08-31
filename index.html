@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HumaniodTTT: Test-Time Capability Reuse for Efficient Humanoid Control">
+  <title>HumaniodTTT | Test-Time Capability Reuse</title>
+  <style>
+    :root {
+      --ink: #e9f0ee;
+      --muted: #9eafab;
+      --line: #2a3a3b;
+      --surface: #152123;
+      --surface-light: #1d2d2f;
+      --page: #0c1416;
+      --teal: #63d7c6;
+      --coral: #ff8e73;
+      --yellow: #e7c66d;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1220px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(12, 20, 22, .95);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--teal); }
+
+    .hero {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: end;
+    }
+
+    .hero-layout > * { min-width: 0; }
+
+    h1 {
+      max-width: 840px;
+      margin: 0;
+      font-size: 58px;
+      line-height: 1.03;
+      letter-spacing: -.035em;
+      font-weight: 750;
+    }
+
+    h1 em {
+      color: var(--teal);
+      font-style: normal;
+    }
+
+    .authors {
+      margin-top: 31px;
+      max-width: 820px;
+      font-size: 16px;
+      line-height: 1.85;
+      color: #d8e2df;
+    }
+
+    .authors sup {
+      color: var(--coral);
+      font-size: .68em;
+      line-height: 0;
+      margin-left: 1px;
+    }
+
+    .authors-line { display: block; }
+
+    .authors .authors-line {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 13px;
+    }
+
+    .author-name {
+      display: inline-block;
+      margin-right: 0;
+    }
+
+    .mobile-title-break { display: none; }
+
+    .affiliations {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .notes {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .note-key { color: var(--yellow); }
+
+    main { padding: 54px 0 90px; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      margin: 0 0 7px;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 31px;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    .section-detail {
+      margin: 0;
+      max-width: 390px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .video-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      transition: border-color .2s ease, transform .2s ease, background-color .2s ease;
+    }
+
+    .video-card:hover {
+      border-color: #52706d;
+      background: var(--surface-light);
+      transform: translateY(-2px);
+    }
+
+    .video-frame {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 5 / 3;
+      background: #091011;
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-index {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      min-width: 31px;
+      padding: 4px 7px;
+      background: rgba(9, 16, 17, .85);
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .video-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 55px;
+      padding: 13px 15px 14px;
+    }
+
+    .video-title {
+      margin: 0;
+      color: #e0e9e6;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .video-type {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 30px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-layout { grid-template-columns: 1fr; }
+      h1 { max-width: 760px; font-size: 48px; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(1220px, calc(100% - 30px)); }
+      .topbar-inner { min-height: 59px; }
+      .nav-links { gap: 14px; font-size: 12px; }
+      .nav-links a:last-child { display: none; }
+      .hero { padding: 49px 0 45px; }
+      h1 { font-size: 35px; overflow-wrap: anywhere; }
+      .authors, .affiliations, .notes, .section-detail { overflow-wrap: anywhere; }
+      .authors .authors-line { column-gap: 8px; }
+      .authors { margin-top: 25px; font-size: 14px; line-height: 1.9; }
+      .section-head { display: block; }
+      .section-detail { margin-top: 11px; text-align: left; }
+      h2 { font-size: 28px; }
+      .video-grid { grid-template-columns: 1fr; gap: 14px; }
+      .footer-inner { display: block; }
+      .footer-inner span + span { display: block; margin-top: 8px; }
+      .mobile-title-break { display: block; }
+      .notes { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="HumaniodTTT home">
+        <span>HumaniodTTT</span>
+      </a>
+      <nav class="nav-links" aria-label="Page navigation">
+        <a href="#paper">Paper</a>
+        <a href="#simulation">Simulation</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="top"></div>
+  <section class="hero" id="paper">
+    <div class="shell hero-layout">
+      <div>
+        <h1><em>HumaniodTTT</em>:<br class="mobile-title-break"> Test-Time Capability Reuse for Efficient Humanoid Control</h1>
+
+        <div class="authors" aria-label="Authors">
+          <span class="authors-line">
+            <span class="author-name">Jingtai Yang<sup>1*</sup></span>
+            <span class="author-name">Yining Wu<sup>1*</sup></span>
+            <span class="author-name">Yanjun Li<sup>1*</sup></span>
+            <span class="author-name">Zeyu Zhang<sup>1*†</sup></span>
+            <span class="author-name">Yandong Guo<sup>2</sup></span>
+          </span>
+          <span class="authors-line">
+            <span class="author-name"><strong>Boxin Shi</strong><sup>1</sup></span>
+            <span class="author-name"><strong>Hao Tang</strong><sup>1‡</sup></span>
+          </span>
+        </div>
+
+        <div class="affiliations">
+          <span class="authors-line"><sup>1</sup> School of Computer Science, Peking University</span>
+          <span class="authors-line"><sup>2</sup> AI<sup>2</sup> Robotics</span>
+        </div>
+
+        <div class="notes">
+          <span class="note-key">*</span> Equal contribution.&nbsp;&nbsp;
+          <span class="note-key">†</span> Project lead.&nbsp;&nbsp;
+          <span class="note-key">‡</span> Corresponding author.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <main id="simulation">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <h2>Capability reuse in motion</h2>
+        </div>
+      </div>
+
+      <div class="video-grid">
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/01_walk_forward_to_turn_to_walk_forward.mp4" type="video/mp4"></video>
+            <span class="video-index">01</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Walk → Turn → Walk</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/02_walk_forward_to_squat_to_walk_forward.mp4" type="video/mp4"></video>
+            <span class="video-index">02</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Walk → Squat → Walk</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/03_walk_forward_to_single_wave_to_walk_forward.mp4" type="video/mp4"></video>
+            <span class="video-index">03</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Walk → Single Wave → Walk</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/04_turn_to_walk_forward_to_turn.mp4" type="video/mp4"></video>
+            <span class="video-index">04</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Turn → Walk → Turn</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/05_turn_to_squat_to_turn.mp4" type="video/mp4"></video>
+            <span class="video-index">05</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Turn → Squat → Turn</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/06_turn_to_single_wave_to_turn.mp4" type="video/mp4"></video>
+            <span class="video-index">06</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Turn → Single Wave → Turn</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/07_squat_to_walk_forward_to_squat.mp4" type="video/mp4"></video>
+            <span class="video-index">07</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Squat → Walk → Squat</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/08_squat_to_turn_to_squat.mp4" type="video/mp4"></video>
+            <span class="video-index">08</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Squat → Turn → Squat</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/09_squat_to_single_wave_to_squat.mp4" type="video/mp4"></video>
+            <span class="video-index">09</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Squat → Single Wave → Squat</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/10_single_wave_to_walk_forward_to_single_wave.mp4" type="video/mp4"></video>
+            <span class="video-index">10</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Single Wave → Walk → Single Wave</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/11_single_wave_to_turn_to_single_wave.mp4" type="video/mp4"></video>
+            <span class="video-index">11</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Single Wave → Turn → Single Wave</p><span class="video-type">G1 rollout</span></div>
+        </article>
+        <article class="video-card">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline preload="metadata"><source src="g1_simulation/12_single_wave_to_squat_to_single_wave.mp4" type="video/mp4"></video>
+            <span class="video-index">12</span>
+          </div>
+          <div class="video-caption"><p class="video-title">Single Wave → Squat → Single Wave</p><span class="video-type">G1 rollout</span></div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>HumaniodTTT · Efficient humanoid control</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('video').forEach((video) => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  </script>
+</body>
+</html>
