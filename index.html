@@ -151,6 +151,12 @@
 
     main { padding: 54px 0 90px; }
 
+    .realworld-section {
+      margin-top: 92px;
+      padding-top: 58px;
+      border-top: 1px solid var(--line);
+    }
+
     .section-head {
       display: flex;
       align-items: end;
@@ -186,7 +192,7 @@
 
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -232,7 +238,7 @@
 
     .video-caption {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       gap: 16px;
       min-height: 55px;
@@ -247,11 +253,7 @@
     }
 
     .video-type {
-      flex: 0 0 auto;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+      display: none;
     }
 
     footer {
@@ -302,6 +304,7 @@
       <nav class="nav-links" aria-label="Page navigation">
         <a href="#paper">Paper</a>
         <a href="#simulation">Simulation</a>
+        <a href="#real-world">Real World</a>
       </nav>
     </div>
   </header>
@@ -319,10 +322,8 @@
             <span class="author-name">Yanjun Li<sup>1*</sup></span>
             <span class="author-name">Zeyu Zhang<sup>1*†</sup></span>
             <span class="author-name">Yandong Guo<sup>2</sup></span>
-          </span>
-          <span class="authors-line">
-            <span class="author-name"><strong>Boxin Shi</strong><sup>1</sup></span>
-            <span class="author-name"><strong>Hao Tang</strong><sup>1‡</sup></span>
+            <span class="author-name">Boxin Shi<sup>1</sup></span>
+            <span class="author-name">Hao Tang<sup>1‡</sup></span>
           </span>
         </div>
 
@@ -345,7 +346,7 @@
     <div class="shell">
       <div class="section-head">
         <div>
-          <h2>Capability reuse in motion</h2>
+          <h2>MuJoCo Simulation</h2>
         </div>
       </div>
 
@@ -436,6 +437,103 @@
         </article>
       </div>
     </div>
+
+    <section class="realworld-section" id="real-world" aria-labelledby="real-world-title">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2 id="real-world-title">Real World</h2>
+          </div>
+        </div>
+
+        <div class="video-grid">
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-01.mp4" type="video/mp4"></video>
+              <span class="video-index">01</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Walk forward, then make a smooth turn, then walk forward.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-02.mp4" type="video/mp4"></video>
+              <span class="video-index">02</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Walk forward, then squat fully and stand up, then walk forward.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-03.mp4" type="video/mp4"></video>
+              <span class="video-index">03</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Walk forward, then raise one hand overhead and wave once, then walk forward.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-04.mp4" type="video/mp4"></video>
+              <span class="video-index">04</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Make a smooth turn, then walk forward, then make a smooth turn.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-05.mp4" type="video/mp4"></video>
+              <span class="video-index">05</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Make a smooth turn, then squat fully and stand up, then make a smooth turn.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-06.mp4" type="video/mp4"></video>
+              <span class="video-index">06</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Make a smooth turn, then raise one hand overhead and wave once, then make a smooth turn.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-07.mp4" type="video/mp4"></video>
+              <span class="video-index">07</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Squat fully and stand up, then walk forward, then squat fully and stand up.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-08.mp4" type="video/mp4"></video>
+              <span class="video-index">08</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Squat fully and stand up, then make a smooth turn, then squat fully and stand up.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-09.mp4" type="video/mp4"></video>
+              <span class="video-index">09</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Squat fully and stand up, then raise one hand overhead and wave once, then squat fully and stand up.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-10.mp4" type="video/mp4"></video>
+              <span class="video-index">10</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Raise one hand overhead and wave once, then walk forward, then raise one hand overhead and wave once.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-11.mp4" type="video/mp4"></video>
+              <span class="video-index">11</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Raise one hand overhead and wave once, then make a smooth turn, then raise one hand overhead and wave once.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+          <article class="video-card">
+            <div class="video-frame">
+              <video autoplay muted loop playsinline preload="metadata"><source src="g1_realworld/HumanoidTTT-12.mp4" type="video/mp4"></video>
+              <span class="video-index">12</span>
+            </div>
+            <div class="video-caption"><p class="video-title">Raise one hand overhead and wave once, then squat fully and stand up, then raise one hand overhead and wave once.</p><span class="video-type">Real-world rollout</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
