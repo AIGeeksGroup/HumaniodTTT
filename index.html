@@ -149,6 +149,18 @@
 
     .note-key { color: var(--yellow); }
 
+    .teaser-wrap {
+      width: min(960px, 100%);
+      margin: 30px auto 0;
+    }
+
+    .teaser-video {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #091011;
+    }
+
     main { padding: 54px 0 90px; }
 
     .realworld-section {
@@ -336,6 +348,12 @@
           <span class="note-key">*</span> Equal contribution.&nbsp;&nbsp;
           <span class="note-key">†</span> Project lead.&nbsp;&nbsp;
           <span class="note-key">‡</span> Corresponding author.
+        </div>
+
+        <div class="teaser-wrap">
+          <video class="teaser-video" autoplay muted loop playsinline controls preload="metadata">
+            <source src="teaser.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
 
