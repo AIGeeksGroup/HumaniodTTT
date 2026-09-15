@@ -3,7 +3,6 @@
 from .certificates import build_certificate, certificate_membership, evaluate_membership
 from .consolidation import ConsolidationDecision, ConsolidationPolicy, Scorer
 from .entry_features import FEATURE_NAMES, capture_entry_features
-from .latent import CompactState, LatentBasis, LatentSteering, PerformanceBand
 from .memory import (
     StoreAction,
     actions,
@@ -13,21 +12,13 @@ from .memory import (
     utility,
 )
 from .motion_features import descriptor_16
-from .sac import ConservativeGate, ReplayBuffer, SACAgent
 from .types import CanonicalReference, StoreEntry
 
 __all__ = [
     "CanonicalReference",
-    "CompactState",
-    "ConservativeGate",
     "ConsolidationDecision",
     "ConsolidationPolicy",
     "FEATURE_NAMES",
-    "LatentBasis",
-    "LatentSteering",
-    "PerformanceBand",
-    "ReplayBuffer",
-    "SACAgent",
     "Scorer",
     "StoreAction",
     "StoreEntry",

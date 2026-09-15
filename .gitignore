@@ -13,5 +13,3 @@
 !src/humanoid_ttt/certificates.py
 !src/humanoid_ttt/memory.py
 !src/humanoid_ttt/consolidation.py
-!src/humanoid_ttt/latent.py
-!src/humanoid_ttt/sac.py
