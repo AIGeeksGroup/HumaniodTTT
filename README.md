@@ -1,4 +1,4 @@
-# HumaniodTTT: Test-Time Capability Reuse for Efficient Humanoid Control
+# HumanoidTTT: Test-Time Capability Reuse for Efficient Humanoid Control
 
 [Model weights](https://huggingface.co/AIGeeksGroup/HumanoidTTT) · [Files](https://huggingface.co/AIGeeksGroup/HumanoidTTT/tree/main)
 
