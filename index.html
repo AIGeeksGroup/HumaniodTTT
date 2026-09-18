@@ -131,6 +131,8 @@
       margin-right: 0;
     }
 
+    .author-name a { text-decoration: none; }
+
     .mobile-title-break { display: none; }
 
     .affiliations {
@@ -149,6 +151,45 @@
 
     .note-key { color: var(--yellow); }
 
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .resource-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .resource-button svg {
+      width: 17px;
+      height: 17px;
+      color: var(--teal);
+    }
+
+    .resource-button:hover {
+      border-color: var(--teal);
+      background: var(--surface-light);
+    }
+
+    .resource-button:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
+    }
+
     .teaser-wrap {
       width: min(960px, 100%);
       margin: 30px auto 0;
@@ -162,6 +203,79 @@
     }
 
     main { padding: 54px 0 90px; }
+
+    .method-section {
+      padding-bottom: 64px;
+      margin-bottom: 58px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 90px;
+    }
+
+    .method-section .section-head { margin-bottom: 38px; }
+
+    .method-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 42px;
+      margin: 0;
+    }
+
+    .method-row + .method-row {
+      margin-top: 44px;
+      padding-top: 44px;
+      border-top: 1px solid var(--line);
+    }
+
+    .method-row-reverse {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+    }
+
+    .method-row-reverse .method-image { grid-column: 2; grid-row: 1; }
+    .method-row-reverse .method-copy { grid-column: 1; grid-row: 1; }
+
+    .method-image {
+      display: block;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      text-decoration: none;
+      cursor: zoom-in;
+    }
+
+    .method-image:hover { border-color: var(--teal); }
+    .method-image:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+    .method-image img { display: block; width: 100%; height: auto; background: #fff; }
+
+    .figure-open {
+      display: block;
+      padding: 8px 12px;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .method-copy { min-width: 0; }
+
+    .method-copy h3 {
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+    }
+
+    .method-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .method-copy p + p { margin-top: 14px; }
+    .method-copy strong { color: var(--ink); font-weight: 600; }
 
     .realworld-section {
       margin-top: 92px;
@@ -284,13 +398,14 @@
     @media (max-width: 900px) {
       .hero-layout { grid-template-columns: 1fr; }
       h1 { max-width: 760px; font-size: 48px; }
+      .method-row, .method-row-reverse { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+      .method-row-reverse .method-image, .method-row-reverse .method-copy { grid-column: auto; grid-row: auto; }
     }
 
     @media (max-width: 640px) {
       .shell { width: min(1220px, calc(100% - 30px)); }
       .topbar-inner { min-height: 59px; }
       .nav-links { gap: 14px; font-size: 12px; }
-      .nav-links a:last-child { display: none; }
       .hero { padding: 49px 0 45px; }
       h1 { font-size: 35px; overflow-wrap: anywhere; }
       .authors, .affiliations, .notes, .section-detail { overflow-wrap: anywhere; }
@@ -304,6 +419,11 @@
       .footer-inner span + span { display: block; margin-top: 8px; }
       .mobile-title-break { display: block; }
       .notes { font-size: 11px; }
+      .method-section { padding-bottom: 44px; margin-bottom: 42px; }
+      .method-section .section-head { margin-bottom: 26px; }
+      .method-row + .method-row { margin-top: 32px; padding-top: 32px; }
+      .method-copy h3 { font-size: 20px; margin-bottom: 12px; }
+      .method-copy p { font-size: 13px; }
     }
   </style>
 </head>
@@ -313,10 +433,10 @@
       <a class="brand" href="#top" aria-label="HumanoidTTT home">
         <span>HumanoidTTT</span>
       </a>
-      <nav class="nav-links" aria-label="Page navigation">
-        <a href="#paper">Paper</a>
-        <a href="#simulation">Simulation</a>
-        <a href="#real-world">Real World</a>
+      <nav class="nav-links" aria-label="Project resources">
+        <a href="https://arxiv.org/abs/2609.00000" target="_blank" rel="noopener noreferrer">Paper</a>
+        <a href="https://github.com/AIGeeksGroup/HumanoidTTT" target="_blank" rel="noopener noreferrer">Code</a>
+        <a href="https://huggingface.co/AIGeeksGroup/HumanoidTTT" target="_blank" rel="noopener noreferrer">Model</a>
       </nav>
     </div>
   </header>
@@ -329,19 +449,16 @@
 
         <div class="authors" aria-label="Authors">
           <span class="authors-line">
-            <span class="author-name">Jingtai Yang<sup>1*</sup></span>
-            <span class="author-name">Yining Wu<sup>1*</sup></span>
-            <span class="author-name">Yanjun Li<sup>1*</sup></span>
-            <span class="author-name">Zeyu Zhang<sup>1*†</sup></span>
-            <span class="author-name">Yandong Guo<sup>2</sup></span>
-            <span class="author-name">Boxin Shi<sup>1</sup></span>
-            <span class="author-name">Hao Tang<sup>1‡</sup></span>
+            <span class="author-name">Jingtai Yang<sup>*</sup></span>
+            <span class="author-name">Yining Wu<sup>*</sup></span>
+            <span class="author-name">Yanjun Li<sup>*</sup></span>
+            <span class="author-name"><a href="https://steve-zeyu-zhang.github.io/" target="_blank" rel="noopener noreferrer">Zeyu Zhang</a><sup>*†</sup></span>
+            <span class="author-name"><a href="https://ha0tang.github.io/" target="_blank" rel="noopener noreferrer">Hao Tang</a><sup>‡</sup></span>
           </span>
         </div>
 
         <div class="affiliations">
-          <span class="authors-line"><sup>1</sup> School of Computer Science, Peking University</span>
-          <span class="authors-line"><sup>2</sup> AI<sup>2</sup> Robotics</span>
+          <span class="authors-line">School of Computer Science, Peking University</span>
         </div>
 
         <div class="notes">
@@ -349,6 +466,21 @@
           <span class="note-key">†</span> Project lead.&nbsp;&nbsp;
           <span class="note-key">‡</span> Corresponding author.
         </div>
+
+        <nav class="project-links" aria-label="Project resources">
+          <a class="resource-button" href="https://arxiv.org/abs/2609.00000" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>
+            Paper
+          </a>
+          <a class="resource-button" href="https://github.com/AIGeeksGroup/HumanoidTTT" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>
+            Code
+          </a>
+          <a class="resource-button" href="https://huggingface.co/AIGeeksGroup/HumanoidTTT" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v8l-9 5-9-5V8l9-5ZM3 8l9 5 9-5M12 13v8"/></svg>
+            Model
+          </a>
+        </nav>
 
         <div class="teaser-wrap">
           <video class="teaser-video" autoplay muted loop playsinline controls preload="metadata">
@@ -360,8 +492,54 @@
     </div>
   </section>
 
-  <main id="simulation">
-    <div class="shell">
+  <main>
+    <section class="method-section" id="method" aria-labelledby="method-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="method-title">Method Overview</h2>
+        </div>
+
+        <figure class="method-row">
+          <a class="method-image" href="figures/teaser_v3.png" target="_blank" rel="noopener noreferrer" aria-label="View the full-resolution HumanoidTTT overview figure in a new tab">
+            <img src="figures/teaser_v3.png" width="2471" height="1155" loading="lazy" decoding="async" alt="HumanoidTTT overview comparing fresh motion generation with entry-applicable reuse, end-to-end latency, and consolidation in a bounded motion store.">
+            <span class="figure-open">View full-size figure ↗</span>
+          </a>
+          <figcaption class="method-copy">
+            <h3>HumanoidTTT: reusable full-motion capabilities for continual humanoid deployment.</h3>
+            <p>For recurring requests, Entry Applicability enables direct reuse of qualified full motions when the current state satisfies their entry certificates, bypassing fresh generation.</p>
+            <p>Test-Time Capability Consolidation uses deployment feedback to adapt the contents of a bounded Full-Motion Store.</p>
+            <p>The lower-left panel compares mean end-to-end latency on the evaluated recurrent request trace.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="method-row method-row-reverse">
+          <a class="method-image" href="figures/HumanoidTTT_v5.1.png" target="_blank" rel="noopener noreferrer" aria-label="View the full-resolution HumanoidTTT workflow figure in a new tab">
+            <img src="figures/HumanoidTTT_v5.1.png" width="3208" height="808" loading="lazy" decoding="async" alt="HumanoidTTT workflow connecting Entry Applicability, the Full-Motion Store, the Frozen Motion Generator, Execution-Based Qualification, and online capability consolidation.">
+            <span class="figure-open">View full-size figure ↗</span>
+          </a>
+          <figcaption class="method-copy">
+            <h3>HumanoidTTT.</h3>
+            <p>Entry Applicability controls direct reuse of Validated Full-Motion Capabilities. A miss invokes the Frozen Motion Generator followed by Execution-Based Qualification.</p>
+            <p>When a Qualified Capability reaches a full Store, a Store-conditioned Double-DQN chooses SKIP or replacement of an existing entry and adapts online from subsequent deployment reuse utility.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="method-row">
+          <a class="method-image" href="figures/HumanoidTTT_Figure3_v2.png" target="_blank" rel="noopener noreferrer" aria-label="View the full-resolution capability consolidation figure in a new tab">
+            <img src="figures/HumanoidTTT_Figure3_v2.png" width="1903" height="762" loading="lazy" decoding="async" alt="Two consolidation actions at a full Store: SKIP retains all existing capabilities; REPLACE j admits the arrival and evicts capability j.">
+            <span class="figure-open">View full-size figure ↗</span>
+          </a>
+          <figcaption class="method-copy">
+            <h3>Consolidation at a qualified full-Store miss.</h3>
+            <p><strong>(a) SKIP</strong> retains the current Store without admitting the arrival.</p>
+            <p><strong>(b) REPLACE(<em>j</em>)</strong> admits the new capability and evicts entry <em>j</em>.</p>
+            <p>The Double-DQN scorer selects an action using Store-conditioned features.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="shell" id="simulation">
       <div class="section-head">
         <div>
           <h2>MuJoCo Simulation</h2>
